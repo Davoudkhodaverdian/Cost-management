@@ -1,0 +1,193 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-custom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    margin: 3px;
+}
+
+.part-main {
+    width: calc(100% / 2);
+    max-width: 600px;
+    margin: 10px;
+}
+
+.container-part {
+
+
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px lightgray;
+
+}
+
+.container-part > .part {
+    display: flex;
+    flex-direction: column;
+}
+
+.persian-text-number {
+    height: 40px;
+}
+
+/* form */
+
+.container-part > .part > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-part > .part > form > div {
+    text-align: right;
+}
+
+.input-custom > div {
+
+    margin: 6px;
+    padding: 6px;
+    border-radius: 3px;
+    text-align: right;
+}
+
+.radio > div {
+    width: calc(100% / 2);
+    border: 1px solid lightgray;
+}
+
+.radio {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.amount > div > div > input,
+.explain > div > div > input {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.amount > div > div > input:focus {
+    border: 1px solid rgb(255, 0, 0);
+} 
+
+
+.radio > div > label, .radio >div > input {
+    cursor: pointer;
+}
+.date-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.date-input > div {
+    width: calc(100% / 3);
+ }
+.date-input > div > input {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+   width: calc(100% - 6px);
+    margin: 0 3px;
+}
+
+/* form-end */
+
+/* left-part */
+.income {
+    border-right: 1px solid red;
+}
+
+.show-cost-income {
+    margin-bottom: 10px;
+}
+.cost-income {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.cost-income > div {
+ width: calc(100% /2);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+
+/* table */
+
+
+.table {
+    margin: 10px;
+    box-shadow: 1px 1px 5px lightgray;
+    max-width: 1220px;
+    overflow-y: auto;
+    border-radius: 2px 2px 0 0;
+    width: 100%;
+    max-width: 1220px;
+    max-height: 200px;
+    text-align: center;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+
+}
+
+table[class='content-table'] thead th {
+    background-color: #7564ff;
+    position: sticky;
+    top: 0;
+    padding: 5px;
+    text-align: center;
+}
+table[class='content-table'] tbody tr {
+    border-bottom: 1px solid lightgray;
+}
+
+  table[class='content-table'] tbody tr:nth-of-type(even) {
+        background-color: antiquewhite; 
+    }
+
+table[class='content-table'] tbody tr:last-of-type {
+        border-bottom: 2px solid #7564ff;
+    }
+
+
+/* table-end */
+
+
+/* modal */
+
+.modal-body-custom {
+    text-align: end;
+}
+
+@media only screen and (max-width: 840px) {
+
+    .container-custom {
+        flex-direction: column-reverse;
+    }
+
+    .part-main, .table {
+        width: unset;
+        max-width: unset;
+    }
+
+
+}
