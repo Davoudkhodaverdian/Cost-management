@@ -13,7 +13,7 @@ let cols = ["amount", "date", "costType", "explain", "key"];
 document.querySelector("form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    if (isNaN(Number(amountRadio.value))) return alert("مبلغ را به درستی وارد کنید");
+    if (isNaN(Number(amountRadio.value)) || amountRadio.value == "") return alert("مبلغ را به درستی وارد کنید");
     else if ((isNaN(Number(dayRadio.value)) || dayRadio.value == "") ||
         (isNaN((Number(monthRadio.value)) || monthRadio.value == "")) ||
         (isNaN(Number(yearRadio.value)) || yearRadio.value == "")) return alert("تاریخ را به درستی وارد کنید");
