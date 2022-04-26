@@ -158,8 +158,8 @@ function renderChart() {
 
     let sortData = data.sort((a, b) => {
 
-        let aArray = a[2].split("/").map(elem => Number(elem));
-        let bArray = b[2].split("/").map(elem => Number(elem));
+        let aArray = a[cols.indexOf("date")].split("/").map(elem => Number(elem));
+        let bArray = b[cols.indexOf("date")].split("/").map(elem => Number(elem));
 
         if (aArray[0] !== bArray[0]) return aArray[0] - bArray[0]
         else if (aArray[1] !== bArray[1]) return aArray[1] - bArray[1]
