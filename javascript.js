@@ -14,13 +14,13 @@ document.querySelector("form").addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (isNaN(Number(amountRadio.value)) || amountRadio.value == "") return alert("مبلغ را به درستی وارد کنید");
-    else if ((isNaN(Number(dayRadio.value)) || dayRadio.value == "") ||
-        (isNaN((Number(monthRadio.value)) || monthRadio.value == "")) ||
-        (isNaN(Number(yearRadio.value)) || yearRadio.value == "")) return alert("تاریخ را به درستی وارد کنید");
+    else if (isNaN(Number(dayRadio.value)) || dayRadio.value == "" || Number(monthRadio.value) > 31) return alert("روز را به درستی وارد کنید");
+    else if (isNaN(Number(monthRadio.value)) || monthRadio.value == "" || Number(monthRadio.value) > 12) return alert("ماه را به درستی وارد کنید");
+    else if (isNaN(Number(yearRadio.value)) || yearRadio.value == "") return alert("سال را به درستی وارد کنید");
 
     let key = Date.now().toString();
-    let array = [ 
-        Number(amountRadio.value),(yearRadio.value + "/" + monthRadio.value + "/" + dayRadio.value),
+    let array = [
+        Number(amountRadio.value), (yearRadio.value + "/" + monthRadio.value + "/" + dayRadio.value),
         (incomeRadio.checked ? "درآمد" : "هزینه"), explainRadio.value, key
     ];
     localStorage.setItem(key, array.join(","));
@@ -64,7 +64,7 @@ class Table {
 
     addRow(array, index) {
 
-        
+
         let key = array[cols.indexOf("key")];
         let tr = document.createElement("tr");
         let tdbtn = document.createElement("td");
@@ -84,10 +84,14 @@ class Table {
 
 
         ["explain", "costType", "date", "amount", "row"].forEach(element => {
-            
+
             let td = document.createElement("td");
+            let valueElement = array[cols.indexOf(element)];
             if (element == "row") td.innerHTML = index;
-            else td.innerHTML = array[cols.indexOf(element)];
+            else if (element == "amount") td.innerHTML = `${valueElement.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            else if (element == "costType")
+                td.innerHTML = `<span class=${(valueElement == "هزینه" ? "cost" : "income") + "-sum"}>${valueElement}</span>`;
+            else td.innerHTML = valueElement;
             tr.appendChild(td)
         });
         this.contentTableBoy.appendChild(tr);
@@ -109,7 +113,7 @@ class Table {
         dataArray.forEach((item) => {
             if (item[cols.indexOf("key")] == key) data = item;
         })
-        
+
         document.querySelector(".modal-div").innerHTML = `
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -118,7 +122,7 @@ class Table {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body modal-body-custom">
-              <div>مبلغ: ${data[cols.indexOf("amount")]}</div>
+              <div>مبلغ: ${Number(data[cols.indexOf("amount")]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
               <div>تاریخ: ${data[cols.indexOf("date")]}</div>
               <div>نوع هزینه: ${data[cols.indexOf("costType")]}</div>
               <div>${data[cols.indexOf("explain")]} :توضیحات</div>
@@ -137,13 +141,13 @@ class Table {
 
     refreshTable() {
         this.contentTableBoy.innerHTML = "";
-        
+
         let data = Object.entries(localStorage).map(([key, value]) => value.split(","));
         data.forEach((row, index) => { table.addRow(row, index + 1); });
         window.myChart = renderChart();
-        
+
         document.querySelector(".income-sum").innerHTML = setIncomeSum();
-        document.querySelector(".cost-sum").innerHTML= setCostSum();
+        document.querySelector(".cost-sum").innerHTML = setCostSum();
     }
 }
 
@@ -153,7 +157,7 @@ let table = new Table(tableDiv);
 table.refreshTable();
 
 function renderChart() {
-    
+
     let data = Object.entries(localStorage).map(([key, value]) => value.split(","));
 
     let sortData = data.sort((a, b) => {
@@ -188,12 +192,12 @@ function renderChart() {
                 label: 'درآمد',
                 data: dataIncome,
                 borderColor: "green",
-    
+
             }, {
                 label: 'هزینه',
                 data: dataCost,
                 borderColor: "red",
-         
+
             },]
         },
     });
@@ -208,7 +212,7 @@ function setIncomeSum() {
     let dataamount = dataIncome.map((elem, index) => elem[cols.indexOf("amount")]);
     let sum = 0;
     dataamount.forEach((elem, index) => sum += Number(elem));
-    return sum;
+    return sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function setCostSum() {
@@ -218,7 +222,7 @@ function setCostSum() {
     let dataamount = dataCost.map((elem, index) => elem[cols.indexOf("amount")]);
     let sum = 0;
     dataamount.forEach((elem, index) => sum += Number(elem));
-    return sum;
+    return sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 

@@ -2,9 +2,24 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+}
+
 .main {
     display: flex;
     flex-direction: column;
+    background-image: url('../images/businessman.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position-y: -100px;
+    background-attachment: fixed;
+
+}
+
+.container-custom.top {
+    margin-top: 50px;
+
 }
 
 .container-custom {
@@ -19,7 +34,7 @@ button {
 
 .part-main {
     width: calc(100% / 2);
-    max-width: 600px;
+    max-width: 400px;
     margin: 10px;
 }
 
@@ -29,10 +44,10 @@ button {
     padding: 10px;
     border-radius: 3px;
     box-shadow: 1px 1px 5px lightgray;
-
+    background-color: white;
 }
 
-.container-part > .part {
+.container-part>.part {
     display: flex;
     flex-direction: column;
 }
@@ -43,16 +58,16 @@ button {
 
 /* form */
 
-.container-part > .part > form {
+.container-part>.part>form {
     display: flex;
     flex-direction: column;
 }
 
-.container-part > .part > form > div {
+.container-part>.part>form>div {
     text-align: right;
 }
 
-.input-custom > div {
+.input-custom>div {
 
     margin: 6px;
     padding: 6px;
@@ -60,7 +75,7 @@ button {
     text-align: right;
 }
 
-.radio > div {
+.radio>div {
     width: calc(100% / 2);
     border: 1px solid lightgray;
 }
@@ -71,58 +86,72 @@ button {
 
 }
 
-.amount > div > div > input,
-.explain > div > div > input {
+.amount>div>div>input,
+.explain>div>div>input {
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 3px;
 }
 
-.amount > div > div > input:focus {
+.amount>div>div>input:focus {
     border: 1px solid rgb(255, 0, 0);
-} 
+}
 
 
-.radio > div > label, .radio >div > input {
+.radio>div>label,
+.radio>div>input {
     cursor: pointer;
 }
+
 .date-input {
     display: flex;
     flex-direction: row;
     justify-content: center;
 
 }
-.date-input > div {
+
+.date-input>div {
     width: calc(100% / 3);
- }
-.date-input > div > input {
+}
+
+.date-input>div>input {
     border: 1px solid lightgray;
     border-radius: 3px;
-   width: calc(100% - 6px);
+    width: calc(100% - 6px);
     margin: 0 3px;
+    text-align: center;
+}
+
+.cost-sum {
+    color: red;
+}
+
+.income-sum {
+    color: green;
 }
 
 /* form-end */
 
 /* left-part */
-.income {
+.cost {
     border-right: 1px solid red;
 }
 
 .show-cost-income {
     margin-bottom: 10px;
 }
+
 .cost-income {
     display: flex;
     flex-direction: row;
 }
 
 
-.cost-income > div {
- width: calc(100% /2);
- display: flex;
- flex-direction: column;
- align-items: center;
+.cost-income>div {
+    width: calc(100% /2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -132,42 +161,30 @@ button {
 .table {
     margin: 10px;
     box-shadow: 1px 1px 5px lightgray;
-    max-width: 1220px;
+    max-width: 820px;
     overflow-y: auto;
     border-radius: 2px 2px 0 0;
     width: 100%;
-    max-width: 1220px;
-    max-height: 200px;
+    max-width: 820px;
+    max-height: 400px;
     text-align: center;
 }
 
 table {
-width: 100%;
-border-collapse: collapse;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: white;
 
 }
 
 table[class='content-table'] thead th {
-    background-color: #7564ff;
+    background-color: #e4e3ef;
     position: sticky;
     top: 0;
     padding: 5px;
     text-align: center;
 }
-table[class='content-table'] tbody tr {
-    border-bottom: 1px solid lightgray;
-}
-
-  table[class='content-table'] tbody tr:nth-of-type(even) {
-        background-color: antiquewhite; 
-    }
-
-table[class='content-table'] tbody tr:last-of-type {
-        border-bottom: 2px solid #7564ff;
-    }
-
 
 /* table-end */
 
@@ -184,7 +201,8 @@ table[class='content-table'] tbody tr:last-of-type {
         flex-direction: column-reverse;
     }
 
-    .part-main, .table {
+    .part-main,
+    .table {
         width: unset;
         max-width: unset;
     }
